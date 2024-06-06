@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float yRange;
     public float horizontalInput;
     public float xRange;
+    public AudioSource swimSound;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,13 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
 
+        if( (Input.anyKey) && !swimSound.isPlaying)
+        {
+            swimSound.Play();
+        } else if (!Input.anyKey)
+        {
+            swimSound.Stop();
+        }
         transform.Translate(Vector2.up * verticalInput * Time.deltaTime * speed);
 
         if (horizontalInput > 0)
